@@ -3,7 +3,7 @@
     <h2 class="text-2xl font-medium">Productos</h2>
 
     <div class="flex items-center justify-end">
-      <button type="button" matButton="filled">Nuevo producto</button>
+      <button type="button" matButton="filled" (click)="gotoProductDetail()">Nuevo producto</button>
     </div>
   </div>
 
@@ -59,7 +59,7 @@
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="columns()"></tr>
-          <tr mat-row *matRowDef="let row; columns: columns();"></tr>
+          <tr mat-row *matRowDef="let row; columns: columns();" (dblclick)="gotoProductDetail(row)"></tr>
         </table>
       </mat-card-content>
 

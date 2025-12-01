@@ -1,13 +1,14 @@
-import { Component, signal } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { Page } from '@ui/components/page';
-import { fakeProducts } from './product-home.data';
-import { Product } from '@/core/interfaces/product';
+import {Component, inject, signal} from '@angular/core';
+import {CurrencyPipe} from '@angular/common';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {Page} from '@ui/components/page';
+import {fakeProducts} from './product-home.data';
+import {Product} from '@/core/interfaces/product';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-home',
@@ -26,4 +27,16 @@ import { Product } from '@/core/interfaces/product';
 export class ProductHome {
   columns = signal<string[]>(['image', 'name', 'price', 'categories']);
   products = signal<Product[]>(fakeProducts);
+
+  #router = inject(Router);
+  #route = inject(ActivatedRoute);
+
+  gotoProductDetail(product?: Product): void {
+    if (product) {
+      this.#router.navigate([product.id, 'edit'], {relativeTo: this.#route}).then();
+    } else {
+      this.#router.navigate(['register'], {relativeTo: this.#route}).then();
+    }
+  }
+
 }
