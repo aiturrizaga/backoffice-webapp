@@ -1,0 +1,33 @@
+<header class="sticky-header border-b border-gray-200 bg-white px-4">
+  <div class="grid grid-cols-2 gap-4 h-12">
+    <!-- Brand -->
+    <div class="flex items-center gap-0.5 -ml-2.5 lg:-ml-0">
+      <div class="block lg:hidden">
+        <button type="button"
+                matIconButton
+                (click)="clickMenu.emit(true)">
+          <mat-icon fontSet="ti" fontIcon="ti-menu-2"/>
+        </button>
+      </div>
+      <div class="text-xl font-medium">Backoffice</div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center justify-end gap-0.5">
+
+      <button type="button" matIconButton>
+        <mat-icon fontSet="ti" fontIcon="ti-bell"/>
+      </button>
+
+      <button type="button" matIconButton>
+        <mat-icon fontSet="ti" fontIcon="ti-apps"/>
+      </button>
+
+      <div class="pl-2">
+        <button type="button" class="cursor-pointer rounded-full focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:bg-blue-700">
+          <app-avatar label="John Doe" styleClass="!bg-blue-900 !text-white" size="lg"/>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

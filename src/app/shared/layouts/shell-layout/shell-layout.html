@@ -1,0 +1,24 @@
+<div class="shell-container">
+  <app-header (clickMenu)="sidenav.toggle()"/>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav
+                 [opened]="!isHandset()"
+                 [attr.role]="isHandset() ? 'dialog' : 'navigation'"
+                 [mode]="isHandset() ? 'over' : 'side'"
+                 [style.width]="sideNavWidth()">
+
+      <app-sidenav
+        [collapsed]="isHandset() ? false : collapsed()"
+        [hideToggleCollapseBtn]="isHandset()"
+        (toggleCollapsed)="toggleCollapsed($event)" />
+    </mat-sidenav>
+
+    <mat-sidenav-content [style.margin-left]="contentMarginLeft()">
+      <main class="shell-main__content">
+        <router-outlet/>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+</div>

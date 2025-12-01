@@ -1,0 +1,84 @@
+<div id="sidebar-header" class="border-b border-gray-200 h-12">
+  <button type="button"
+          [matMenuTriggerFor]="menu"
+          [class.justify-center]="collapsed()"
+          [class.justify-between]="!collapsed()"
+          class="flex items-center px-4 size-full hover:bg-gray-100 cursor-pointer focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500">
+    <div class="flex items-center gap-4">
+
+      @if (selectedModule(); as module) {
+        <img class="w-8" [src]="module.imageUrl" [alt]="module.label"/>
+        <span [class.hidden]="collapsed()"
+              class="text-lg font-medium">
+          {{ module.label }}
+        </span>
+      } @else {
+        <img class="w-8" src="https://img.icons8.com/softteal-gradient/96/module.png" alt="Module"/>
+        <div [class.hidden]="collapsed()"
+             class="flex flex-col items-start justify-start">
+          <div class="text-sm font-medium">
+            Mi empresa
+          </div>
+          <span class="text-xs text-gray-500 font-medium">Selecciona una empresa</span>
+        </div>
+      }
+    </div>
+
+    <i [class.hidden]="collapsed()"
+       class="ti ti-selector text-lg"></i>
+  </button>
+</div>
+
+<div id="sidebar-content" class="overflow-y-auto h-full pt-2 pb-28">
+  <ul class="flex flex-col gap-1.5">
+    @for (item of menuItems(); track $index) {
+      <li class="px-1">
+        <a [routerLink]="item.routerLink"
+           routerLinkActive="bg-blue-900 text-white hover:bg-blue-900 hover:text-white"
+           [class.justify-center]="collapsed()"
+           [class.justify-start]="!collapsed()"
+           [matTooltip]="item.label"
+           [matTooltipDisabled]="!collapsed()"
+           matTooltipPosition="right"
+           matTooltipShowDelay="300"
+           class="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-blue-500/10 hover:text-blue-900 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500"
+        >
+          @if (item.icon) {
+            <mat-icon>{{ item.icon }}</mat-icon>
+          }
+          @if (!collapsed()) {
+            <span class="text-base font-medium truncate">{{ item.label }}</span>
+          }
+        </a>
+      </li>
+    }
+  </ul>
+</div>
+
+@if (!hideToggleCollapseBtn()) {
+  <div id="sidenav-fixed-footer" class="absolute bottom-0 w-full bg-gray-50 border-t border-gray-200 py-2">
+    <div class="flex items-center px-2" [class.justify-center]="collapsed()">
+      <button type="button" matIconButton (click)="toggleCollapsed.emit(!collapsed())">
+        <div [class.rotate-180]="collapsed()">
+          <mat-icon>menu_open</mat-icon>
+        </div>
+      </button>
+    </div>
+  </div>
+}
+
+<mat-menu #menu="matMenu" class="w-[252px]">
+  @for (module of moduleItems(); track module.id) {
+    @if (selectedModule() !== module) {
+      <button type="button"
+              mat-menu-item
+              class="gray-hover"
+              (click)="selectedModule.set(module)">
+        <div class="flex items-center gap-2 py-2">
+          <img class="w-8" [src]="module.imageUrl" [alt]="module.id"/>
+          <span class="text-base text-gray-800">{{ module.label }}</span>
+        </div>
+      </button>
+    }
+  }
+</mat-menu>

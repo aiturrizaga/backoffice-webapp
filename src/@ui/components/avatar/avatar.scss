@@ -1,0 +1,33 @@
+@reference 'tailwindcss';
+
+.avatar {
+  @apply relative inline-flex items-center justify-center size-8 overflow-hidden bg-gray-100 text-gray-600 font-medium;
+
+  &--rounded {
+    @apply rounded-full;
+  }
+
+  &--rectangle {
+    @apply rounded-md;
+  }
+
+  &--xs {
+    @apply size-5 text-xs;
+  }
+
+  &--sm {
+    @apply size-6 text-xs;
+  }
+
+  &--md {
+    @apply size-8 text-sm;
+  }
+
+  &--lg {
+    @apply size-10 text-base;
+  }
+
+  &--xl {
+    @apply size-12 text-xl;
+  }
+}
