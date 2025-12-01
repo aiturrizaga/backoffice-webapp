@@ -30,7 +30,7 @@ export class Sidenav {
     {
       icon: 'dashboard',
       label: 'Dashboard',
-      routerLink: 'home'
+      routerLink: 'dashboard'
     },
     {
       icon: 'sell',
@@ -45,7 +45,7 @@ export class Sidenav {
     {
       icon: 'account_box',
       label: 'Clientes',
-      routerLink: 'partners'
+      routerLink: 'customers'
     },
     {
       icon: 'inventory_2',
