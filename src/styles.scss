@@ -35,6 +35,19 @@ body {
 }
 
 /* You can add global styles to this file, and also import other style files */
+:root {
+  @include mat.card-overrides((
+    elevated-container-color: #ffffff,
+  ));
+
+  @include mat.table-overrides((
+    background-color: #ffffff,
+    header-headline-color: #83858A,
+    row-item-outline-color: #EEEEF1,
+    header-headline-size: 12px,
+    row-item-label-text-color: #828387
+  ));
+}
 
 html, body {
   height: 100%;
@@ -87,4 +100,51 @@ body {
 
 .mdc-icon-button.mat-mdc-icon-button {
   @apply focus:outline-2 focus:outline-offset-2 focus:outline-blue-500;
+}
+
+
+.mat-mdc-card {
+  &.p-0 {
+    overflow: hidden;
+
+    .mat-mdc-card-content {
+      padding: 0;
+    }
+
+    .mat-mdc-card-header {
+      padding: 0;
+    }
+  }
+}
+
+
+.mat-mdc-table {
+  border-bottom: 1px solid #EEEEF1 !important;
+
+  .mat-mdc-header-cell {
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .mat-row-even {
+    background-color: rgba(0, 0, 0, 0.01);
+  }
+
+  .mat-mdc-row {
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+  }
+
+  .mat-mdc-row:hover {
+    background-color: rgba(156, 39, 176, 0.02) !important;
+  }
+
+  .mat-mdc-row.mat-row-even:hover {
+    background-color: rgba(156, 39, 176, 0.025) !important;
+  }
+
+  .mat-mdc-cell {
+    box-sizing: content-box;
+    white-space: nowrap;
+  }
 }
