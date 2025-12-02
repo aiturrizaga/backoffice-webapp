@@ -1,1 +1,98 @@
-<p>dashboard-home works!</p>
+<app-page>
+  <div page-header class="flex items-center justify-between p-4">
+    <h2 class="text-2xl font-medium">Dashboard</h2>
+  </div>
+
+  <div page-content class="max-w-full mx-auto px-4 py-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      @for (metric of metrics(); track metric.title) {
+        <mat-card>
+          <mat-card-content class="p-6">
+            <div class="flex items-start justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">{{ metric.title }}</p>
+                <h3 class="text-3xl font-bold text-gray-800 mb-2">{{ metric.value }}</h3>
+                <div class="flex items-center">
+                  @if (metric.change >= 0) {
+                    <mat-icon class="text-green-500 text-sm">trending_up</mat-icon>
+                    <span class="text-green-500 text-sm ml-1">+{{ metric.change }}%</span>
+                  } @else {
+                    <mat-icon class="text-red-500 text-sm">trending_down</mat-icon>
+                    <span class="text-red-500 text-sm ml-1">{{ metric.change }}%</span>
+                  }
+                </div>
+              </div>
+              <div class="rounded-full size-12 flex items-center justify-center"
+                   [style.background-color]="metric.color + '20'">
+                <mat-icon [style.color]="metric.color">{{ metric.icon }}</mat-icon>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+
+    <mat-card class="p-0">
+      <mat-card-header>
+        <div class="p-4">
+          <h3 matCardTitle>Ventas Recientes</h3>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        @if (isLoading()) {
+          <div class="p-6">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            <p class="text-center text-gray-500 mt-4">Cargando ventas...</p>
+          </div>
+        } @else {
+          <div class="p-12 text-center">
+            <mat-icon class="text-gray-300 text-6xl mb-4">receipt_long</mat-icon>
+            <p class="text-gray-500 text-lg">No hay ventas con el filtro seleccionado</p>
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-8">
+      <mat-card>
+        <mat-card-header>
+          <h3 matCardTitle>Productos más vendidos</h3>
+        </mat-card-header>
+        <mat-card-content class="p-6 mt-2">
+          @for (item of topProducts(); track item.name; let i = $index) {
+            <div class="flex items-center justify-between mb-4 last:mb-0">
+              <div class="flex items-center gap-3">
+                  <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-semibold text-sm">
+                    {{ i + 1 }}
+                  </span>
+                <span class="text-gray-700">{{ item.name }}</span>
+              </div>
+              <span class="font-medium text-gray-900">{{ item.sales }} ventas</span>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <h3 matCardTitle>Actividad reciente</h3>
+        </mat-card-header>
+        <mat-card-content class="p-6 mt-2">
+          @for (activity of recentActivity(); track activity.id) {
+            <div class="flex items-start gap-3 mb-4 last:mb-0">
+              <div class="rounded-full p-2 bg-gray-100">
+                <mat-icon class="text-gray-600 text-sm">{{ activity.icon }}</mat-icon>
+              </div>
+              <div class="flex-1">
+                <p class="text-sm text-gray-700">{{ activity.message }}</p>
+                <p class="text-xs text-gray-500 mt-1">{{ activity.time }}</p>
+              </div>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</app-page>
+
