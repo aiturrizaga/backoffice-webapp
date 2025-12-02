@@ -1,1 +1,16 @@
-<p>setting-home works!</p>
+<app-page>
+  <div page-header class="flex items-center justify-between p-4">
+    <h2 class="text-2xl font-medium">Configuración</h2>
+  </div>
+
+  <div page-content class="max-w-full mx-auto px-4 py-2">
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+      @for (link of links; track link) {
+        <a mat-tab-link
+           (click)="activeLink = link"
+           [active]="activeLink == link"> {{link}} </a>
+      }
+    </nav>
+    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+  </div>
+</app-page>
